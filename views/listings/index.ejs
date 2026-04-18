@@ -1,0 +1,173 @@
+<% layout("layouts/boilerplate") %> 
+
+<style>
+   #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;   /* ✅ vertical alignment */
+    /* gap: 1rem; */
+    justify-content: center;
+    
+}
+
+/* Filters */
+.filter {
+    text-align: center;
+    margin-top: 1rem;
+    opacity: 0.7;
+    flex: 1 1 100px;
+    max-width: 120px;
+}
+
+
+    .filter:hover{
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .filter p{
+        font-size: 0.8rem;
+    }
+
+    #filters a {
+    text-decoration: none;
+    color: black;
+}
+
+.tax-toggle {
+    /* margin-left: auto;   */
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    background-color: #f8f9fa;
+    white-space: nowrap;  /* ✅ prevent breaking */
+}
+
+/* Text styling */
+.tax-toggle label {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    color: #555;
+}
+
+/* Align switch nicely */
+.tax-toggle .form-check {
+    margin: 0;
+}
+
+/* Optional hover effect */
+.tax-toggle:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+</style>
+
+
+<div id="filters">
+
+    <a href="/listings" class="filter">
+    <div><i class="fa-solid fa-border-all"></i></div>
+    <p>All</p>
+</a>
+
+    <a href="/listings/category/Trending" class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+    </a>
+
+    <a href="/listings/category/Rooms" class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Rooms</p>
+    </a>
+
+    <a href="/listings/category/<%= encodeURIComponent('Iconic Cities') %>" class="filter">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
+        <p>Iconic Cities</p>
+    </a>
+
+    <a href="/listings/category/Mountains" class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+    </a>
+
+    <a href="/listings/category/Castles" class="filter">
+        <div><i class="fa-solid fa-fort-awesome"></i></div>
+        <p>Castles</p>
+    </a>
+
+    <a href="/listings/category/<%= encodeURIComponent('Amazing Pools') %>" class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pools</p>
+    </a>
+
+    <a href="/listings/category/Camping" class="filter">
+        <div><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+    </a>
+
+    <a href="/listings/category/Farms" class="filter">
+        <div><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+    </a>
+
+    <a href="/listings/category/Arctic" class="filter">
+        <div><i class="fa-solid fa-snowflake"></i></div>
+        <p>Arctic</p>
+    </a>
+
+    <a href="/listings/category/Farms" class="filter">
+        <div><i class="fa-solid fa-igloo"></i></div>
+        <p>Domes</p>
+    </a>
+
+    <a href="/listings/category/Arctic" class="filter">
+        <div><i class="fa-solid fa-ship"></i></div>
+        <p>Boats</p>
+    </a>
+
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+            <label class="form-check-label" for="switchCheckDefault">Default switch checkbox input</label>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 mt-3">
+   <% for(let listing of allListings) { %>
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+       <div class="listing-card col card">
+        
+        <img src="<%= listing.image.url %>" 
+        class="card-img-top" alt="listing_image"
+         style="height: 20rem;">
+
+        <div class="card-img-overlay"></div>
+        <div class="card-body">
+            <p class="card-text">
+                <b><%= listing.title %></b><br>
+                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+            </p>
+        </div>
+       </div>
+    </a>
+   <% } %>
+    
+</div>
+
+<!-- <ul>
+    <% for(let listing of allListings) { %>
+        <li>
+            <a href="/listings/<%= listing._id %>">
+                <%= listing.title %> 
+            </a>
+        </li>
+    <% } %>
+</ul> -->
+
+
+
