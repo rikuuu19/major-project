@@ -142,7 +142,8 @@
 
 <script>
 window.onload = () => {
-    const listingData = JSON.parse('<%- JSON.stringify(listing) %>');
+    // const listingData = JSON.parse('<%- JSON.stringify(listing) %>');
+    const listingData = <%- JSON.stringify(listing) %>;
 
     if (listingData.geometry && listingData.geometry.coordinates.length > 0) {
 
