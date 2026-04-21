@@ -34,7 +34,8 @@ const Listing = require("../models/listing.js");
 const initData = require("./data.js"); // your sampleListings file
 const axios = require("axios");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/Wandero";
+require("dotenv").config();
+const MONGO_URL = process.env.ATLAS_URI;
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
