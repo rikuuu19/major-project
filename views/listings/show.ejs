@@ -108,11 +108,12 @@
         <% } %>
 
         <div class="row">
-            <% for(review of listing.reviews) { %>
+            <% for(let review of listing.reviews) { %>
                 <div class="card col-5 ms-3 mb-3">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <%= review.author.username %>
+                            <!-- <%= review.author.username %> -->
+                             <%= review.author ? review.author.username : "Anonymous" %>
                         </h5>
 
                         <p class="starability-result card-text" 
