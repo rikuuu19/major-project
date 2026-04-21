@@ -33,6 +33,7 @@ const mongoose = require("mongoose");
 const Listing = require("../models/listing.js");
 const initData = require("./data.js"); // your sampleListings file
 const axios = require("axios");
+const User = require("../models/user");
 
 require("dotenv").config();
 const MONGO_URL = process.env.ATLAS_URI;
@@ -50,7 +51,19 @@ async function main() {
 }
 
 const initDB = async () => {
-  await Listing.deleteMany({});
+  // await Listing.deleteMany({});
+  try {
+    await Listing.deleteMany({});
+    console.log("Old listings deleted");
+
+     const user = await User.findOne();
+
+      if (!user) {
+      console.log("❌ No user found! Please signup first.");
+      process.exit();
+    }
+
+    console.log("Using user:", user.username);
 
   for (let listingObj of initData.data) {
     const newListing = new Listing(listingObj);
@@ -87,12 +100,17 @@ const initDB = async () => {
     }
 
     // Set Owner ID
-    newListing.Owner = "6998fc0c49b993b4cfec9ec0"; // your user ID
+    // newListing.Owner = "6998fc0c49b993b4cfec9ec0"; // your user ID
+    newListing.Owner = user._id; // assign to found user
     await newListing.save();
   }
 
   console.log("Data seeded with correct coordinates!");
   process.exit();
+}catch (err) {
+    console.log("❌ Error:", err);
+    process.exit();
+  }
 };
 
 initDB();

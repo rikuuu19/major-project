@@ -12,7 +12,9 @@
 
         <div class="card-body">
             <p class="card-text">
-                Owned by <i><%= listing.Owner.username %></i>
+                <!-- Owned by <i><%= listing.Owner.username %></i> -->
+                 Owned by <i><%= listing.Owner ? listing.Owner.username : "Unknown" %></i>
+                 
             </p>
 
             <p class="card-text"><%= listing.description %></p>
@@ -29,7 +31,8 @@
     <div class="mt-4"></div>
 
     <!-- Edit/Delete Listing -->
-    <% if(currUser && currUser._id.equals(listing.Owner._id)) { %>
+    <!-- <% if(currUser && currUser._id.equals(listing.Owner._id)) { %> -->
+        <% if(currUser && listing.Owner && currUser._id.equals(listing.Owner._id)) { %>
         <div class="btns">
             <a href="/listings/<%= listing._id %>/edit" 
                class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
