@@ -16,3 +16,19 @@
     }, false)
   })
 })()
+
+const gstToggle = document.querySelector("#switchCheckDefault");
+const prices = document.querySelectorAll(".price");
+
+gstToggle.addEventListener("change", () => {
+    prices.forEach(priceEl => {
+        let basePrice = parseFloat(priceEl.dataset.original);
+
+        if (gstToggle.checked) {
+            let newPrice = basePrice + (basePrice * 0.18);
+            priceEl.innerText = newPrice.toLocaleString("en-IN");
+        } else {
+            priceEl.innerText = basePrice.toLocaleString("en-IN");
+        }
+    });
+});
