@@ -170,10 +170,42 @@ module.exports.editListing = async (req, res,next ) => {
     res.render("listings/edit.ejs", { listing, originalImageUrl });
 }
 
+// module.exports.updateListing = async (req, res) => {
+//     let { id } = req.params;
+
+//     console.log("REQ BODY:", req.body); // DEBUG
+
+//     let listing = await Listing.findById(id);
+
+//     Object.assign(listing, req.body.listing);
+
+//     if (req.file) {
+//         listing.image = {
+//             url: req.file.path,
+//             filename: req.file.filename
+//         };
+//     }
+
+//     await listing.save();
+
+//     req.flash("success", "Listing updated successfully!");
+//     res.redirect(`/listings/${id}`);
+// };
+
 module.exports.updateListing = async (req, res) => {
     let { id } = req.params;
 
-    console.log("REQ BODY:", req.body); // DEBUG
+    console.log("REQ BODY:", req.body);
+
+    // ✅ FIX ARRAY → STRING
+    if (Array.isArray(req.body.listing.category)) {
+        req.body.listing.category = req.body.listing.category[0];
+    }
+
+    // ✅ fallback
+    if (!req.body.listing.category) {
+        req.body.listing.category = "Trending";
+    }
 
     let listing = await Listing.findById(id);
 

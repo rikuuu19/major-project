@@ -9,7 +9,11 @@ module.exports.listingSchema = joi.object({
         location: joi.string().required(),
         // country: joi.string().required()
         country: joi.string().allow("").optional(),
-        category: joi.string().required()
+        // category: joi.string().required()
+        category: joi.alternatives().try(
+    joi.string(),
+    joi.array().items(joi.string())
+).default("Trending")
     }).required(),
 });
 

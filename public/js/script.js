@@ -1,10 +1,9 @@
+console.log("JS Loaded");
 (() => {
   'use strict'
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   const forms = document.querySelectorAll('.needs-validation')
 
-  // Loop over them and prevent submission
   Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
       if (!form.checkValidity()) {
@@ -15,6 +14,7 @@
       form.classList.add('was-validated')
     }, false)
   })
+<<<<<<< HEAD
 })()
 
 const gstToggle = document.querySelector("#switchCheckDefault");
@@ -31,4 +31,24 @@ gstToggle.addEventListener("change", () => {
             priceEl.innerText = basePrice.toLocaleString("en-IN");
         }
     });
+=======
+})();
+
+// ✅ GST LOGIC
+document.addEventListener("DOMContentLoaded", () => {
+  const checkbox = document.getElementById("switchCheckDefault");
+  const priceEl = document.querySelector(".price");
+
+  if (!checkbox || !priceEl) return;
+
+  const basePrice = parseFloat(priceEl.dataset.price);
+
+  checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+      priceEl.innerText = (basePrice * 1.18).toLocaleString("en-IN");
+    } else {
+      priceEl.innerText = basePrice.toLocaleString("en-IN");
+    }
+  });
+>>>>>>> a204477 (Final fixes: GST toggle + category bug)
 });
