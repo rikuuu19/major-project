@@ -18,11 +18,23 @@ router.get("/category/:category", async (req, res) => {
     res.render("listings/index", { allListings });
 });
 
+// router.get("/search", async (req, res) => {
+//     const query = req.query.q;
+
+//     const allListings = await Listing.find({
+//         country: { $regex: query, $options: "i" }   // case-insensitive
+//     });
+
+//     res.render("listings/index", { allListings });
+// });
+
 router.get("/search", async (req, res) => {
     const query = req.query.q;
 
+    console.log("Search:", query); // 👈 check in terminal
+
     const allListings = await Listing.find({
-        country: { $regex: query, $options: "i" }   // case-insensitive
+        country: { $regex: query, $options: "i" }
     });
 
     res.render("listings/index", { allListings });

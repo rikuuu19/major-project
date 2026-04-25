@@ -1,22 +1,40 @@
 const Listing = require('../models/listing');
 const Review = require('../models/review');
 
-module.exports.createReview = async (req, res,next) => {
+// module.exports.createReview = async (req, res,next) => {
+//     let listing = await Listing.findById(req.params.id);
+//     let newReview = new Review(req.body.review);
+
+//     newReview.author = req.user._id;
+//     listing.reviews.push(newReview);
+
+//     await newReview.save();
+//     await listing.save();
+
+//     // console.log(newReview);
+//     // res.send("Review added successfully");
+
+//     req.flash("success", "New Review added successfully!");
+//     res.redirect(`/listings/${listing._id}`);
+// }
+
+module.exports.createReview = async (req, res, next) => {
     let listing = await Listing.findById(req.params.id);
+
     let newReview = new Review(req.body.review);
 
     newReview.author = req.user._id;
-    listing.reviews.push(newReview);
 
     await newReview.save();
-    await listing.save();
 
-    // console.log(newReview);
-    // res.send("Review added successfully");
+    // ✅ ONLY PUSH ID (NOT FULL OBJECT)
+    listing.reviews.push(newReview._id);
+
+    await listing.save();
 
     req.flash("success", "New Review added successfully!");
     res.redirect(`/listings/${listing._id}`);
-}
+};
 
 module.exports.deleteReview = async (req, res,next) => {
     let { id , reviewId } = req.params;

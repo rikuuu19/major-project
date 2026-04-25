@@ -10,10 +10,13 @@ module.exports.listingSchema = joi.object({
         // country: joi.string().required()
         country: joi.string().allow("").optional(),
         // category: joi.string().required()
-        category: joi.alternatives().try(
-    joi.string(),
-    joi.array().items(joi.string())
-).default("Trending")
+//         category: joi.alternatives().try(
+//     joi.string(),
+//     joi.array().items(joi.string())
+// ).default("Trending")
+//     }).required(),
+// });
+category: joi.string().default("Trending")
     }).required(),
 });
 
