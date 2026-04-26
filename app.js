@@ -22,6 +22,10 @@ const userRouter = require('./routes/user.js');
 const dbUrl = process.env.ATLAS_URI;
 console.log(process.env.ATLAS_URI);
 
+mongoose.connection.on("connected", () => {
+    console.log("✅ Connected DB:", mongoose.connection.name);
+});
+
 main().then((res) =>{
     console.log("Connected to MongoDB");
 })

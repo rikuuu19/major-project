@@ -1,10 +1,15 @@
 const Listing = require('../models/listing.js');
 // const axios = require("axios");
 
-module.exports.index = async (req, res,next) => {
-    let allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
-}
+// module.exports.index = async (req, res,next) => {
+//     let allListings = await Listing.find({});
+//     res.render("listings/index.ejs", { allListings });
+// }
+module.exports.index = async (req, res) => {
+    const allListings = await Listing.find({});
+    console.log("LISTINGS FROM DB:", allListings); // 👈 ADD THIS
+    res.render("listings/index", { allListings });
+};
 
 module.exports.newListing = (req, res) => {
     res.render("listings/new.ejs");
