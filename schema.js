@@ -14,9 +14,10 @@ module.exports.listingSchema = joi.object({
 //     joi.string(),
 //     joi.array().items(joi.string())
 // ).default("Trending")
-//     }).required(),
+//     }).required(), 520+
+
 // });
-category: joi.string().default("Trending")
+category: joi.string().allow("").default("Trending")
     }).required(),
 });
 
